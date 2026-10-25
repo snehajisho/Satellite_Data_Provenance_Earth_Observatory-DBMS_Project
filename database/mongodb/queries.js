@@ -4,18 +4,23 @@
 // Collection: observation_metadata
 // ============================================
 
+const db = db.getSiblingDB("satellite_geo_repository");
+
 // 1. Display all observation metadata
 db.observation_metadata.find().pretty();
 
+
 // 2. Find metadata for a specific observation
 db.observation_metadata.findOne({
-    observation_id: 101
+    observation_id: 1
 });
+
 
 // 3. Find observations from a specific satellite
 db.observation_metadata.find({
     "satellite.satellite_id": 1
 }).pretty();
+
 
 // 4. Find observations with low cloud cover
 db.observation_metadata.find({
@@ -24,25 +29,26 @@ db.observation_metadata.find({
     }
 }).pretty();
 
+
 // 5. Find high-quality observations
 db.observation_metadata.find({
     "quality_metadata.quality_flag": "GOOD"
 }).pretty();
 
+
 // 6. Find observations containing a particular spectral band
 db.observation_metadata.find({
-    spectral_bands: "B08"
+    "spectral_metadata.bands": "B08"
 }).pretty();
 
-// 7. Find observations processed using cloud masking
+
+// 7. Find observations where cloud masking is available
 db.observation_metadata.find({
-    processing_metadata: {
-        $elemMatch: {
-            $regex: "cloud masking",
-            $options: "i"
-        }
+    "processing_metadata.cloud_masking": {
+        $exists: true
     }
 }).pretty();
+
 
 // 8. Count observations for each satellite
 db.observation_metadata.aggregate([
@@ -59,7 +65,8 @@ db.observation_metadata.aggregate([
             observation_count: -1
         }
     }
-]);
+]).pretty();
+
 
 // 9. Average cloud cover by satellite
 db.observation_metadata.aggregate([
@@ -76,7 +83,8 @@ db.observation_metadata.aggregate([
             average_cloud_cover: 1
         }
     }
-]);
+]).pretty();
+
 
 // 10. Show observations with image information
 db.observation_metadata.find(
@@ -85,6 +93,6 @@ db.observation_metadata.find(
         _id: 0,
         observation_id: 1,
         satellite: 1,
-        image: 1
+        image_metadata: 1
     }
 ).pretty();
