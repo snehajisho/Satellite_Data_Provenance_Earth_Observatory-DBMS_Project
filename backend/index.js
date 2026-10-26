@@ -14,6 +14,7 @@ app.use(express.json());
 const satellitesRouter = require('./routes/satellites');
 const observationsRouter = require('./routes/observations');
 const provenanceRouter = require('./routes/provenance');
+const authRoutes = require('./routes/auth');
 
 // Health check
 app.get('/api/health', async (req, res) => {
@@ -42,6 +43,9 @@ app.use('/api/observations', observationsRouter);
 
 // Provenance endpoints
 app.use('/api/provenance', provenanceRouter);
+
+// Auth endpoints
+app.use('/api/auth', authRoutes);
 
 // Handle unknown endpoints
 app.use((req, res) => {
