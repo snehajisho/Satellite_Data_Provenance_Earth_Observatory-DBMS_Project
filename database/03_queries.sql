@@ -162,3 +162,64 @@ WHERE observation_id IN (
     WHERE g.area_name = 'Berlin'
 )
 ORDER BY product_id;
+
+USE satellite_geo_repository;
+
+-- Q6: Count observations for each satellite
+SELECT s.satellite_name, COUNT(o.observation_id) AS total_observations
+FROM SATELLITE s
+JOIN SENSOR se ON s.satellite_id = se.satellite_id
+JOIN OBSERVATION o ON se.sensor_id = o.sensor_id
+GROUP BY s.satellite_id, s.satellite_name
+ORDER BY total_observations DESC;
+
+
+-- Q7: Average cloud cover for each geographic location
+SELECT g.area_name, AVG(o.cloud_cover_percent) AS average_cloud_cover
+FROM GEO_LOCATION g
+JOIN OBSERVATION o ON g.geo_location_id = o.geo_location_id
+GROUP BY g.geo_location_id, g.area_name
+ORDER BY average_cloud_cover DESC;
+
+
+-- Q8: Locations with at least two observations
+SELECT g.area_name, COUNT(o.observation_id) AS observation_count
+FROM GEO_LOCATION g
+JOIN OBSERVATION o ON g.geo_location_id = o.geo_location_id
+GROUP BY g.geo_location_id, g.area_name
+HAVING COUNT(o.observation_id) >= 2;
+
+
+-- Q9: Find data products with processing levels above the average
+SELECT product_id, product_name, processing_level
+FROM DATA_PRODUCT
+WHERE processing_level > (
+    SELECT AVG(processing_level)
+    FROM DATA_PRODUCT
+);
+
+
+-- Q10: Find satellites that have at least one observation
+SELECT satellite_id, satellite_name
+FROM SATELLITE
+WHERE satellite_id IN (
+    SELECT DISTINCT se.satellite_id
+    FROM SENSOR se
+    JOIN OBSERVATION o ON se.sensor_id = o.sensor_id
+);
+
+
+-- Q11: Find products that have been used as inputs in processing
+SELECT product_id, product_name
+FROM DATA_PRODUCT
+WHERE product_id IN (
+    SELECT DISTINCT input_product_id
+    FROM PROCESSING_ACTIVITY
+);
+
+
+-- Q12: Count products by processing level
+SELECT processing_level, COUNT(*) AS total_products
+FROM DATA_PRODUCT
+GROUP BY processing_level
+ORDER BY total_products DESC;

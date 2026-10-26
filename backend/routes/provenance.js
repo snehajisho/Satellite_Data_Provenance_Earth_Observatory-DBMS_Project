@@ -1,9 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
+const { requireAuth } = require('./authMiddleware');
 
 // GET processing history for a data product
-router.get('/:id', async (req, res) => {
+// Login is required to view provenance.
+router.get('/:id', requireAuth, async (req, res) => {
+    const productId = Number(req.params.id);
+
+    if (!Number.isInteger(productId) || productId < 1) {
+        return res.status(400).json({
+            success: false,
+            message: 'Data product ID must be a positive integer'
+        });
+    }
+
     try {
         const [rows] = await pool.query(`
             SELECT
@@ -19,12 +30,14 @@ router.get('/:id', async (req, res) => {
                 op.product_id AS output_product_id,
                 op.product_name AS output_product_name
             FROM PROCESSING_ACTIVITY pa
-            JOIN DATA_PRODUCT ip ON pa.input_product_id = ip.product_id
-            JOIN DATA_PRODUCT op ON pa.output_product_id = op.product_id
+            JOIN DATA_PRODUCT ip
+                ON pa.input_product_id = ip.product_id
+            JOIN DATA_PRODUCT op
+                ON pa.output_product_id = op.product_id
             WHERE pa.input_product_id = ?
                OR pa.output_product_id = ?
             ORDER BY pa.started_at
-        `, [req.params.id, req.params.id]);
+        `, [productId, productId]);
 
         res.json({
             success: true,
@@ -33,6 +46,7 @@ router.get('/:id', async (req, res) => {
         });
     } catch (error) {
         console.error('Error fetching provenance:', error.message);
+
         res.status(500).json({
             success: false,
             message: 'Failed to fetch processing provenance'
