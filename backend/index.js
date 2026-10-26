@@ -15,6 +15,7 @@ const satellitesRouter = require('./routes/satellites');
 const observationsRouter = require('./routes/observations');
 const provenanceRouter = require('./routes/provenance');
 const authRoutes = require('./routes/auth');
+const metadataRouter = require('./routes/metadata');
 
 // Health check
 app.get('/api/health', async (req, res) => {
@@ -44,8 +45,11 @@ app.use('/api/observations', observationsRouter);
 // Provenance endpoints
 app.use('/api/provenance', provenanceRouter);
 
-// Auth endpoints
+// Authentication endpoints
 app.use('/api/auth', authRoutes);
+
+// Metadata endpoints
+app.use('/api/metadata', metadataRouter);
 
 // Handle unknown endpoints
 app.use((req, res) => {

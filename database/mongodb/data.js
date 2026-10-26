@@ -47,7 +47,11 @@ db.observation_metadata.insertMany([
             image_type: "Multispectral Earth Observation",
             format: "JPEG2000",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_1.jpg",
+            thumbnail_path: "images/berlin-1.jpeg",
+            image_paths: [
+                "images/berlin-1.jpeg",
+                "images/berlin-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -118,7 +122,11 @@ db.observation_metadata.insertMany([
             image_type: "Multispectral Earth Observation",
             format: "JPEG2000",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_2.jpg",
+            thumbnail_path: "images/madrid-1.jpeg",
+            image_paths: [
+                "images/madrid-1.jpeg",
+                "images/madrid-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -189,7 +197,11 @@ db.observation_metadata.insertMany([
             image_type: "Multispectral Earth Observation",
             format: "JPEG2000",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_3.jpg",
+            thumbnail_path: "images/oslo-1.jpeg",
+            image_paths: [
+                "images/oslo-1.jpeg",
+                "images/oslo-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -260,7 +272,11 @@ db.observation_metadata.insertMany([
             image_type: "Optical Earth Observation",
             format: "GeoTIFF",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_4.jpg",
+            thumbnail_path: "images/berlin-1.jpeg",
+            image_paths: [
+                "images/berlin-1.jpeg",
+                "images/berlin-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -331,7 +347,11 @@ db.observation_metadata.insertMany([
             image_type: "Multispectral Earth Observation",
             format: "JPEG2000",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_5.jpg",
+            thumbnail_path: "images/rome-1.jpeg",
+            image_paths: [
+                "images/rome-1.jpeg",
+                "images/rome-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -402,7 +422,11 @@ db.observation_metadata.insertMany([
             image_type: "Synthetic Aperture Radar",
             format: "GeoTIFF",
             preview_format: "PNG",
-            thumbnail_path: "/images/observation_6.jpg",
+            thumbnail_path: "images/bengaluru-1.jpeg",
+            image_paths: [
+                "images/bengaluru-1.jpeg",
+                "images/bengaluru-2.jpeg"
+            ],
             available_visualizations: [
                 "radar_intensity"
             ],
@@ -467,7 +491,11 @@ db.observation_metadata.insertMany([
             image_type: "Optical Earth Observation",
             format: "GeoTIFF",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_7.jpg",
+            thumbnail_path: "images/madrid-1.jpeg",
+            image_paths: [
+                "images/madrid-1.jpeg",
+                "images/madrid-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -538,7 +566,11 @@ db.observation_metadata.insertMany([
             image_type: "Multispectral Earth Observation",
             format: "JPEG2000",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_8.jpg",
+            thumbnail_path: "images/oslo-1.jpeg",
+            image_paths: [
+                "images/oslo-1.jpeg",
+                "images/oslo-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -609,7 +641,11 @@ db.observation_metadata.insertMany([
             image_type: "Optical Earth Observation",
             format: "GeoTIFF",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_9.jpg",
+            thumbnail_path: "images/bengaluru-1.jpeg",
+            image_paths: [
+                "images/bengaluru-1.jpeg",
+                "images/bengaluru-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
@@ -680,7 +716,11 @@ db.observation_metadata.insertMany([
             image_type: "Multispectral Earth Observation",
             format: "JPEG2000",
             preview_format: "JPEG",
-            thumbnail_path: "/images/observation_10.jpg",
+            thumbnail_path: "images/berlin-2.jpeg",
+            image_paths: [
+                "images/berlin-1.jpeg",
+                "images/berlin-2.jpeg"
+            ],
             available_visualizations: [
                 "true_colour",
                 "false_colour"
