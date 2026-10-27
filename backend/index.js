@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const pool = require('./db');
 
 const app = express();
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, '../database/mongodb/images')));
 
 // Import routes
 const satellitesRouter = require('./routes/satellites');
