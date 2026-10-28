@@ -120,6 +120,10 @@ router.put('/:id', requireAuth, requireAdmin, async (req, res) => {
         });
     }
 
+    // Keep the submitted calendar date unchanged; converting the ISO value with
+    // Date would apply timezone rules and could shift it to the previous day.
+    const launchDate = String(launch_date).slice(0, 10);
+
     try {
         const [result] = await pool.execute(
             `UPDATE SATELLITE
@@ -131,7 +135,7 @@ router.put('/:id', requireAuth, requireAdmin, async (req, res) => {
              WHERE satellite_id = ?`,
             [
                 satellite_name.trim(),
-                launch_date,
+                launchDate,
                 orbit_type.trim(),
                 Number(orbit_altitude_km),
                 status.trim(),
