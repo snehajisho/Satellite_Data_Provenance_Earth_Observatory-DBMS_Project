@@ -122,11 +122,26 @@ function SatelliteExplorer({ satellites, observations, onRefresh, onError, user 
   const filtered = satellites.filter((s) => `${s.satellite_name} ${s.orbit_type} ${s.status}`.toLowerCase().includes(search.toLowerCase()))
   const current = satellites.find((s) => s.satellite_id === selected) || filtered[0]
   const satObs = observations.filter((o) => current && String(o.satellite_name) === String(current.satellite_name))
-  const save = async (e) => { e.preventDefault(); const data = Object.fromEntries(new FormData(e.currentTarget)); try { await api.updateSatellite(current.satellite_id, { ...data, orbit_altitude_km: Number(data.orbit_altitude_km) }); setEditing(false); onRefresh() } catch (err) { onError(err.message) } }
+  const save = async (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const data = {
+      satellite_name: formData.get('satellite_name'),
+      launch_date: formData.get('launch_date'),
+      orbit_type: formData.get('orbit_type'),
+      orbit_altitude_km: Number(formData.get('orbit_altitude_km')),
+      status: formData.get('status'),
+    }
+    try {
+      await api.updateSatellite(current.satellite_id, data)
+      setEditing(false)
+      onRefresh()
+    } catch (err) { onError(err.message) }
+  }
   const remove = async () => { if (!window.confirm('Delete this satellite? Related records may prevent deletion.')) return; try { await api.deleteSatellite(current.satellite_id); setSelected(null); onRefresh() } catch (err) { onError(err.message) } }
   return <Section eyebrow="03 / SATELLITE EXPLORER" title="Orbiting <em>platforms.</em>" actions={<Refresh onClick={onRefresh} />}><div className="explorer-layout"><aside className="list-panel"><input className="full-input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search satellites" />{filtered.map((s) => <button className={`list-item ${current?.satellite_id === s.satellite_id ? 'selected' : ''}`} key={s.satellite_id} onClick={() => setSelected(s.satellite_id)}><strong>{s.satellite_name}</strong><span>{s.orbit_type} · {s.status}</span></button>)}{!filtered.length && <p className="muted">No satellites match this search.</p>}</aside><div className="detail-panel">{!current ? <State title="No satellites available" text="The authenticated satellites endpoint returned no records." /> : editing ? <EditSatellite item={current} onSave={save} onCancel={() => setEditing(false)} /> : <><div className="detail-header"><div><p className="eyebrow">SATELLITE {current.satellite_id}</p><h2>{current.satellite_name}</h2><p className="detail-subtitle">{current.orbit_type} orbit · {current.orbit_altitude_km} km</p></div><span className="quality-badge">{current.status}</span></div><div className="info-grid"><Info label="Launch date" text={value(current.launch_date)} /><Info label="Orbit type" text={value(current.orbit_type)} /><Info label="Altitude" text={`${value(current.orbit_altitude_km)} km`} /><Info label="Observations" text={satObs.length} /></div><h3 className="subheading">Associated observations</h3><div className="mini-table">{satObs.map((o) => <div key={o.observation_id}><b>#{o.observation_id}</b><span>{o.area_name}</span><span>{o.observation_status}</span><span>{o.cloud_cover_percent}% cloud</span></div>)}{!satObs.length && <p className="muted">No SQL observations are associated with this satellite.</p>}</div>{user?.role === 'ADMIN' && <div className="admin-actions"><button className="secondary-button" onClick={() => setEditing(true)}>Edit satellite</button><button className="danger-button" onClick={remove}>Delete satellite</button></div>}<p className="source-note">Source: authenticated <code>GET /api/satellites</code> and <code>GET /api/observations</code>.</p></>}</div></div></Section>
 }
-function EditSatellite({ item, onSave, onCancel }) { return <form className="edit-form" onSubmit={onSave}><h2>Edit satellite</h2>{[['satellite_name', 'Name'], ['launch_date', 'Launch date'], ['orbit_type', 'Orbit type'], ['orbit_altitude_km', 'Altitude (km)'], ['status', 'Status']].map(([key, label]) => <label key={key}>{label}<input name={key} required defaultValue={item[key]} /></label>)}<div className="admin-actions"><button className="primary-button">Save</button><button type="button" className="secondary-button" onClick={onCancel}>Cancel</button></div></form> }
+function EditSatellite({ item, onSave, onCancel }) { return <form className="edit-form" onSubmit={onSave}><h2>Edit satellite</h2>{[['satellite_name', 'Name'], ['launch_date', 'Launch date'], ['orbit_type', 'Orbit type'], ['orbit_altitude_km', 'Altitude (km)'], ['status', 'Status']].map(([key, label]) => <label key={key}>{label}<input name={key} required defaultValue={item[key]} /></label>)}<div className="admin-actions"><button type="submit" className="primary-button">Save</button><button type="button" className="secondary-button" onClick={onCancel}>Cancel</button></div></form> }
 
 function ObservationExplorer({ observations, satellites, onRefresh, onError, user }) {
   const [filters, setFilters] = useState({ query: '', location: '', satellite: '', status: '', cloud: '' }); const [applied, setApplied] = useState(filters); const [editing, setEditing] = useState(null)
