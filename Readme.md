@@ -218,3 +218,108 @@ Before opening the frontend, ensure that:
 3. The backend is running with valid environment configuration.
 4. The frontend development server is running.
 
+## Testing Instructions
+
+The project includes three test suites to verify database integrity, MongoDB metadata, and backend API functionality.
+
+### 1. MySQL Test Suite
+
+**Location:** `database/mysql/test_cases.sql`
+
+**Steps:**
+
+1. Open MySQL Workbench.
+2. Connect to your MySQL server.
+3. Select the project database:
+
+```sql
+USE satellite_geo_repository;
+```
+
+4. Open `test_cases.sql` from the `database/mysql` directory.
+5. Execute the SQL test queries.
+
+The test suite checks the MySQL database structure, records, relationships, constraints, and other database functionality.
+
+Review the query results in MySQL Workbench to verify that the tests pass.
+
+### 2. MongoDB Test Suite
+
+**Location:** `database/mongodb/mongo_test_cases.js`
+
+**Prerequisites:**
+- MongoDB server must be running.
+- The `satellite_geo_repository` database must be populated.
+
+**Steps:**
+
+1. Open MongoDB Compass or a terminal.
+2. Ensure MongoDB is running.
+3. Execute the test script.
+
+Using MongoDB Shell (`mongosh`):
+
+```bash
+mongosh "mongodb://localhost:27017/satellite_geo_repository" database/mongodb/mongo_test_cases.js
+```
+
+The MongoDB test suite verifies observation metadata documents, document counts, fields, location information, and metadata consistency.
+
+Review the test output to verify successful execution.
+
+### 3. Backend API Test Suite
+
+**Location:** `backend/tests/api.test.js`
+
+**Prerequisites:**
+- MySQL and MongoDB must be running.
+- Both databases must contain the project data.
+- Backend environment variables must be configured.
+- A valid user account must exist.
+
+**Step 1: Start the backend server**
+
+Open a terminal:
+
+```bash
+cd backend
+node index.js
+```
+
+Keep the server running.
+
+**Step 2: Configure test credentials**
+
+Open a second terminal:
+
+```powershell
+cd backend
+
+$env:API_TEST_EMAIL="your-email@example.com"
+$env:API_TEST_PASSWORD="your-password"
+```
+
+Replace the example credentials with a valid project account.
+
+**Step 3: Run the API tests**
+
+```bash
+npm test
+```
+
+The test command executes:
+
+```bash
+node --test
+```
+
+
+### 4. Overall Test Summary
+
+| Test Suite | Testing Method | Purpose |
+|---|---|---|
+| MySQL | SQL script in MySQL Workbench | Verify relational database structure, records, and constraints |
+| MongoDB | JavaScript test script using `mongosh` | Verify metadata documents and consistency |
+| Backend API | Node.js built-in test runner | Verify API endpoints, authentication, and database integration |
+
+All three test suites should be executed to verify the database and backend functionality of the Satellite Data Provenance & Earth Observation Repository.
