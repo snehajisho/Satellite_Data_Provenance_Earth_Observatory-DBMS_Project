@@ -13,11 +13,13 @@ router.get('/', requireAuth, async (req, res) => {
                 s.satellite_name,
                 se.sensor_name,
                 g.area_name,
-                g.country AS location_country
+                g.country AS location_country,
+                dp.processing_level
             FROM OBSERVATION o
             JOIN SENSOR se ON o.sensor_id = se.sensor_id
             JOIN SATELLITE s ON se.satellite_id = s.satellite_id
             JOIN GEO_LOCATION g ON o.geo_location_id = g.geo_location_id
+            LEFT JOIN DATA_PRODUCT dp ON dp.observation_id = o.observation_id
             ORDER BY o.observation_id
         `);
 
@@ -55,11 +57,13 @@ router.get('/:id', requireAuth, async (req, res) => {
                 s.satellite_name,
                 se.sensor_name,
                 g.area_name,
-                g.country AS location_country
+                g.country AS location_country,
+                dp.processing_level
             FROM OBSERVATION o
             JOIN SENSOR se ON o.sensor_id = se.sensor_id
             JOIN SATELLITE s ON se.satellite_id = s.satellite_id
             JOIN GEO_LOCATION g ON o.geo_location_id = g.geo_location_id
+            LEFT JOIN DATA_PRODUCT dp ON dp.observation_id = o.observation_id
             WHERE o.observation_id = ?
         `, [id]);
 
