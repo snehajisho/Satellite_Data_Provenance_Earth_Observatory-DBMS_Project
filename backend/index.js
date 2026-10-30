@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const pool = require('./db');
 
 const app = express();
@@ -9,13 +10,15 @@ const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
-
+app.use('/images', express.static(path.join(__dirname, '../database/mongodb/images')));
 
 // Import routes
 const satellitesRouter = require('./routes/satellites');
 const observationsRouter = require('./routes/observations');
 const provenanceRouter = require('./routes/provenance');
+const authRoutes = require('./routes/auth');
 const metadataRouter = require('./routes/metadata');
+
 // Health check
 app.get('/api/health', async (req, res) => {
     try {
@@ -43,7 +46,13 @@ app.use('/api/observations', observationsRouter);
 
 // Provenance endpoints
 app.use('/api/provenance', provenanceRouter);
+
+// Authentication endpoints
+app.use('/api/auth', authRoutes);
+
+// Metadata endpoints
 app.use('/api/metadata', metadataRouter);
+
 // Handle unknown endpoints
 app.use((req, res) => {
     res.status(404).json({
