@@ -759,6 +759,638 @@ db.observation_metadata.insertMany([
                 "Version 2.0 metadata record"
             ]
         }
+    },
+        // --------------------------------------------------------
+    // Observation 11 - Sentinel-2A / Mumbai
+    // --------------------------------------------------------
+    {
+        observation_id: 11,
+        data_product_id: 11,
+
+        satellite: {
+            satellite_id: 1,
+            satellite_name: "Sentinel-2A",
+            mission: "Copernicus Sentinel-2"
+        },
+
+        sensor: {
+            sensor_id: 1,
+            name: "MSI",
+            type: "Multispectral"
+        },
+
+        location: {
+            geo_location_id: 6,
+            area_name: "Mumbai",
+            country: "India",
+            region: "Maharashtra"
+        },
+
+        image_metadata: {
+            image_type: "Multispectral Earth Observation",
+            format: "JPEG2000",
+            preview_format: "JPEG",
+            thumbnail_path: "images/mumbai-1.jpeg",
+            image_paths: [
+                "images/mumbai-1.jpeg",
+                "images/mumbai-2.jpeg"
+            ],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_MUMBAI_01"
+        },
+
+        spectral_metadata: {
+            bands: ["B01", "B02", "B03", "B04", "B05", "B06",
+                    "B07", "B08", "B8A", "B09", "B10", "B11", "B12"],
+            band_groups: {
+                visible: ["B02", "B03", "B04"],
+                near_infrared: ["B08", "B8A"],
+                shortwave_infrared: ["B11", "B12"]
+            },
+            spatial_resolution_m: [10, 20, 60]
+        },
+
+        quality_metadata: {
+            quality_flag: "GOOD",
+            cloud_assessment: "Low",
+            cloud_cover_percent: 10.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Available",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Low cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 12 - Sentinel-2B / Mumbai
+    // --------------------------------------------------------
+    {
+        observation_id: 12,
+        data_product_id: 12,
+
+        satellite: {
+            satellite_id: 2,
+            satellite_name: "Sentinel-2B",
+            mission: "Copernicus Sentinel-2"
+        },
+
+        sensor: {
+            sensor_id: 2,
+            name: "MSI",
+            type: "Multispectral"
+        },
+
+        location: {
+            geo_location_id: 6,
+            area_name: "Mumbai",
+            country: "India",
+            region: "Maharashtra"
+        },
+
+        image_metadata: {
+            image_type: "Multispectral Earth Observation",
+            format: "JPEG2000",
+            preview_format: "JPEG",
+            thumbnail_path: "images/mumbai-1.jpeg",
+            image_paths: ["images/mumbai-1.jpeg", "images/mumbai-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_MUMBAI_02"
+        },
+
+        spectral_metadata: {
+            bands: ["B01", "B02", "B03", "B04", "B05", "B06",
+                    "B07", "B08", "B8A", "B09", "B10", "B11", "B12"],
+            band_groups: {
+                visible: ["B02", "B03", "B04"],
+                near_infrared: ["B08", "B8A"],
+                shortwave_infrared: ["B11", "B12"]
+            },
+            spatial_resolution_m: [10, 20, 60]
+        },
+
+        quality_metadata: {
+            quality_flag: "GOOD",
+            cloud_assessment: "Low",
+            cloud_cover_percent: 15.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Available",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Low cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 13 - Sentinel-2A / Delhi
+    // --------------------------------------------------------
+    {
+        observation_id: 13,
+        data_product_id: 13,
+
+        satellite: {
+            satellite_id: 1,
+            satellite_name: "Sentinel-2A",
+            mission: "Copernicus Sentinel-2"
+        },
+
+        sensor: {
+            sensor_id: 1,
+            name: "MSI",
+            type: "Multispectral"
+        },
+
+        location: {
+            geo_location_id: 7,
+            area_name: "Delhi",
+            country: "India",
+            region: "Delhi"
+        },
+
+        image_metadata: {
+            image_type: "Multispectral Earth Observation",
+            format: "JPEG2000",
+            preview_format: "JPEG",
+            thumbnail_path: "images/delhi-1.jpeg",
+            image_paths: ["images/delhi-1.jpeg", "images/delhi-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_DELHI_01"
+        },
+
+        spectral_metadata: {
+            bands: ["B01", "B02", "B03", "B04", "B05", "B06",
+                    "B07", "B08", "B8A", "B09", "B10", "B11", "B12"],
+            band_groups: {
+                visible: ["B02", "B03", "B04"],
+                near_infrared: ["B08", "B8A"],
+                shortwave_infrared: ["B11", "B12"]
+            },
+            spatial_resolution_m: [10, 20, 60]
+        },
+
+        quality_metadata: {
+            quality_flag: "GOOD",
+            cloud_assessment: "Very Low",
+            cloud_cover_percent: 8.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Available",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Very low cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 14 - Landsat 9 / Delhi
+    // --------------------------------------------------------
+    {
+        observation_id: 14,
+        data_product_id: 14,
+
+        satellite: {
+            satellite_id: 3,
+            satellite_name: "Landsat 9",
+            mission: "Landsat Program"
+        },
+
+        sensor: {
+            sensor_id: 3,
+            name: "OLI-2",
+            type: "Optical"
+        },
+
+        location: {
+            geo_location_id: 7,
+            area_name: "Delhi",
+            country: "India",
+            region: "Delhi"
+        },
+
+        image_metadata: {
+            image_type: "Optical Earth Observation",
+            format: "GeoTIFF",
+            preview_format: "JPEG",
+            thumbnail_path: "images/delhi-1.jpeg",
+            image_paths: ["images/delhi-1.jpeg", "images/delhi-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_DELHI_02"
+        },
+
+        spectral_metadata: {
+            bands: ["Band 1", "Band 2", "Band 3", "Band 4",
+                    "Band 5", "Band 6", "Band 7", "Band 8", "Band 9"],
+            band_groups: {
+                visible: ["Band 2", "Band 3", "Band 4"],
+                near_infrared: ["Band 5"],
+                shortwave_infrared: ["Band 6", "Band 7"]
+            },
+            spatial_resolution_m: [15, 30, 100]
+        },
+
+        quality_metadata: {
+            quality_flag: "GOOD",
+            cloud_assessment: "Low",
+            cloud_cover_percent: 12.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Available",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Optical observation"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 15 - Sentinel-2A / Chennai
+    // --------------------------------------------------------
+    {
+        observation_id: 15,
+        data_product_id: 15,
+
+        satellite: {
+            satellite_id: 1,
+            satellite_name: "Sentinel-2A",
+            mission: "Copernicus Sentinel-2"
+        },
+
+        sensor: {
+            sensor_id: 1,
+            name: "MSI",
+            type: "Multispectral"
+        },
+
+        location: {
+            geo_location_id: 8,
+            area_name: "Chennai",
+            country: "India",
+            region: "Tamil Nadu"
+        },
+
+        image_metadata: {
+            image_type: "Multispectral Earth Observation",
+            format: "JPEG2000",
+            preview_format: "JPEG",
+            thumbnail_path: "images/chennai-1.jpeg",
+            image_paths: ["images/chennai-1.jpeg", "images/chennai-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_CHENNAI_01"
+        },
+
+        spectral_metadata: {
+            bands: ["B01", "B02", "B03", "B04", "B05", "B06",
+                    "B07", "B08", "B8A", "B09", "B10", "B11", "B12"],
+            band_groups: {
+                visible: ["B02", "B03", "B04"],
+                near_infrared: ["B08", "B8A"],
+                shortwave_infrared: ["B11", "B12"]
+            },
+            spatial_resolution_m: [10, 20, 60]
+        },
+
+        quality_metadata: {
+            quality_flag: "ACCEPTABLE",
+            cloud_assessment: "Moderate",
+            cloud_cover_percent: 20.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Available",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Moderate cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 16 - Sentinel-2B / Chennai
+    // --------------------------------------------------------
+    {
+        observation_id: 16,
+        data_product_id: 16,
+
+        satellite: {
+            satellite_id: 2,
+            satellite_name: "Sentinel-2B",
+            mission: "Copernicus Sentinel-2"
+        },
+
+        sensor: {
+            sensor_id: 2,
+            name: "MSI",
+            type: "Multispectral"
+        },
+
+        location: {
+            geo_location_id: 8,
+            area_name: "Chennai",
+            country: "India",
+            region: "Tamil Nadu"
+        },
+
+        image_metadata: {
+            image_type: "Multispectral Earth Observation",
+            format: "JPEG2000",
+            preview_format: "JPEG",
+            thumbnail_path: "images/chennai-1.jpeg",
+            image_paths: ["images/chennai-1.jpeg", "images/chennai-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_CHENNAI_02"
+        },
+
+        spectral_metadata: {
+            bands: ["B01", "B02", "B03", "B04", "B05", "B06",
+                    "B07", "B08", "B8A", "B09", "B10", "B11", "B12"],
+            band_groups: {
+                visible: ["B02", "B03", "B04"],
+                near_infrared: ["B08", "B8A"],
+                shortwave_infrared: ["B11", "B12"]
+            },
+            spatial_resolution_m: [10, 20, 60]
+        },
+
+        quality_metadata: {
+            quality_flag: "GOOD",
+            cloud_assessment: "Low",
+            cloud_cover_percent: 18.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Available",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Low cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 17 - Sentinel-2A / Helsinki
+    // --------------------------------------------------------
+    {
+        observation_id: 17,
+        data_product_id: 17,
+
+        satellite: {
+            satellite_id: 1,
+            satellite_name: "Sentinel-2A",
+            mission: "Copernicus Sentinel-2"
+        },
+
+        sensor: {
+            sensor_id: 1,
+            name: "MSI",
+            type: "Multispectral"
+        },
+
+        location: {
+            geo_location_id: 9,
+            area_name: "Helsinki",
+            country: "Finland",
+            region: "Uusimaa"
+        },
+
+        image_metadata: {
+            image_type: "Multispectral Earth Observation",
+            format: "JPEG2000",
+            preview_format: "JPEG",
+            thumbnail_path: "images/helsinki-1.jpeg",
+            image_paths: ["images/helsinki-1.jpeg", "images/helsinki-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_HELSINKI_01"
+        },
+
+        spectral_metadata: {
+            bands: ["B01", "B02", "B03", "B04", "B05", "B06",
+                    "B07", "B08", "B8A", "B09", "B10", "B11", "B12"],
+            band_groups: {
+                visible: ["B02", "B03", "B04"],
+                near_infrared: ["B08", "B8A"],
+                shortwave_infrared: ["B11", "B12"]
+            },
+            spatial_resolution_m: [10, 20, 60]
+        },
+
+        quality_metadata: {
+            quality_flag: "ACCEPTABLE",
+            cloud_assessment: "Moderate",
+            cloud_cover_percent: 25.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Recommended",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Moderate cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 18 - Landsat 9 / Helsinki
+    // --------------------------------------------------------
+    {
+        observation_id: 18,
+        data_product_id: 18,
+
+        satellite: {
+            satellite_id: 3,
+            satellite_name: "Landsat 9",
+            mission: "Landsat Program"
+        },
+
+        sensor: {
+            sensor_id: 3,
+            name: "OLI-2",
+            type: "Optical"
+        },
+
+        location: {
+            geo_location_id: 9,
+            area_name: "Helsinki",
+            country: "Finland",
+            region: "Uusimaa"
+        },
+
+        image_metadata: {
+            image_type: "Optical Earth Observation",
+            format: "GeoTIFF",
+            preview_format: "JPEG",
+            thumbnail_path: "images/helsinki-1.jpeg",
+            image_paths: ["images/helsinki-1.jpeg", "images/helsinki-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_HELSINKI_02"
+        },
+
+        spectral_metadata: {
+            bands: ["Band 1", "Band 2", "Band 3", "Band 4",
+                    "Band 5", "Band 6", "Band 7", "Band 8", "Band 9"],
+            band_groups: {
+                visible: ["Band 2", "Band 3", "Band 4"],
+                near_infrared: ["Band 5"],
+                shortwave_infrared: ["Band 6", "Band 7"]
+            },
+            spatial_resolution_m: [15, 30, 100]
+        },
+
+        quality_metadata: {
+            quality_flag: "ACCEPTABLE",
+            cloud_assessment: "Moderate",
+            cloud_cover_percent: 30.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Recommended",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Moderate cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 19 - Sentinel-2A / Moscow
+    // --------------------------------------------------------
+    {
+        observation_id: 19,
+        data_product_id: 19,
+
+        satellite: {
+            satellite_id: 1,
+            satellite_name: "Sentinel-2A",
+            mission: "Copernicus Sentinel-2"
+        },
+
+        sensor: {
+            sensor_id: 1,
+            name: "MSI",
+            type: "Multispectral"
+        },
+
+        location: {
+            geo_location_id: 10,
+            area_name: "Moscow",
+            country: "Russia",
+            region: "Moscow Oblast"
+        },
+
+        image_metadata: {
+            image_type: "Multispectral Earth Observation",
+            format: "JPEG2000",
+            preview_format: "JPEG",
+            thumbnail_path: "images/moscow-1.jpeg",
+            image_paths: ["images/moscow-1.jpeg", "images/moscow-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_MOSCOW_01"
+        },
+
+        spectral_metadata: {
+            bands: ["B01", "B02", "B03", "B04", "B05", "B06",
+                    "B07", "B08", "B8A", "B09", "B10", "B11", "B12"],
+            band_groups: {
+                visible: ["B02", "B03", "B04"],
+                near_infrared: ["B08", "B8A"],
+                shortwave_infrared: ["B11", "B12"]
+            },
+            spatial_resolution_m: [10, 20, 60]
+        },
+
+        quality_metadata: {
+            quality_flag: "REVIEW",
+            cloud_assessment: "High",
+            cloud_cover_percent: 35.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Recommended",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "High cloud coverage"]
+        }
+    },
+
+    // --------------------------------------------------------
+    // Observation 20 - Landsat 9 / Moscow
+    // --------------------------------------------------------
+    {
+        observation_id: 20,
+        data_product_id: 20,
+
+        satellite: {
+            satellite_id: 3,
+            satellite_name: "Landsat 9",
+            mission: "Landsat Program"
+        },
+
+        sensor: {
+            sensor_id: 3,
+            name: "OLI-2",
+            type: "Optical"
+        },
+
+        location: {
+            geo_location_id: 10,
+            area_name: "Moscow",
+            country: "Russia",
+            region: "Moscow Oblast"
+        },
+
+        image_metadata: {
+            image_type: "Optical Earth Observation",
+            format: "GeoTIFF",
+            preview_format: "JPEG",
+            thumbnail_path: "images/moscow-1.jpeg",
+            image_paths: ["images/moscow-1.jpeg", "images/moscow-2.jpeg"],
+            available_visualizations: ["true_colour", "false_colour"],
+            source_product: "S2A_MOSCOW_02"
+        },
+
+        spectral_metadata: {
+            bands: ["Band 1", "Band 2", "Band 3", "Band 4",
+                    "Band 5", "Band 6", "Band 7", "Band 8", "Band 9"],
+            band_groups: {
+                visible: ["Band 2", "Band 3", "Band 4"],
+                near_infrared: ["Band 5"],
+                shortwave_infrared: ["Band 6", "Band 7"]
+            },
+            spatial_resolution_m: [15, 30, 100]
+        },
+
+        quality_metadata: {
+            quality_flag: "ACCEPTABLE",
+            cloud_assessment: "Moderate",
+            cloud_cover_percent: 28.0,
+            geometric_quality: "GOOD",
+            radiometric_quality: "GOOD"
+        },
+
+        processing_metadata: {
+            atmospheric_correction: "Not applied",
+            cloud_masking: "Recommended",
+            terrain_correction: "Not applied",
+            processing_notes: ["Sample metadata record", "Moderate cloud coverage"]
+        }
     }
 ]);
 

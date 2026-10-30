@@ -1,24 +1,4 @@
-USE satellite_geo_repository;
-SHOW TABLES;
-
-SELECT 'MISSION' AS table_name, COUNT(*) AS row_count FROM MISSION
-UNION ALL
-SELECT 'SATELLITE', COUNT(*) FROM SATELLITE
-UNION ALL
-SELECT 'SATELLITE_MISSION', COUNT(*) FROM SATELLITE_MISSION
-UNION ALL
-SELECT 'SENSOR', COUNT(*) FROM SENSOR
-UNION ALL
-SELECT 'GROUND_STATION', COUNT(*) FROM GROUND_STATION
-UNION ALL
-SELECT 'GEO_LOCATION', COUNT(*) FROM GEO_LOCATION
-UNION ALL
-SELECT 'OBSERVATION', COUNT(*) FROM OBSERVATION
-UNION ALL
-SELECT 'DATA_PRODUCT', COUNT(*) FROM DATA_PRODUCT
-UNION ALL
-SELECT 'PROCESSING_ACTIVITY', COUNT(*) FROM PROCESSING_ACTIVITY;
-
+```sql
 USE satellite_geo_repository;
 
 START TRANSACTION;
@@ -111,6 +91,7 @@ VALUES
 
 -- =====================================================
 -- 6. GEO_LOCATION
+-- Original five locations + five additional locations
 -- =====================================================
 
 INSERT INTO GEO_LOCATION
@@ -130,12 +111,27 @@ VALUES
  59.70, 60.00, 10.40, 10.90),
 
 (5, 'Rome', 'Italy', 'Lazio',
- 41.70, 42.00, 12.30, 12.80);
+ 41.70, 42.00, 12.30, 12.80),
+
+(6, 'Mumbai', 'India', 'Maharashtra',
+ 18.90, 19.30, 72.75, 73.05),
+
+(7, 'Delhi', 'India', 'Delhi',
+ 28.40, 28.90, 76.80, 77.35),
+
+(8, 'Chennai', 'India', 'Tamil Nadu',
+ 12.80, 13.25, 80.10, 80.35),
+
+(9, 'Helsinki', 'Finland', 'Uusimaa',
+ 60.10, 60.35, 24.80, 25.20),
+
+(10, 'Moscow', 'Russia', 'Moscow Oblast',
+ 55.50, 55.95, 37.20, 37.90);
 
 -- =====================================================
 -- 7. OBSERVATION
--- Sample observation records for database testing.
--- These are not verified acquisition records from your ZIPs.
+-- Twenty sample observation records.
+-- These are not verified acquisition records from ZIPs.
 -- =====================================================
 
 INSERT INTO OBSERVATION
@@ -171,10 +167,46 @@ VALUES
  '2026-10-12 10:00:30', 18175, 30.00, 'Completed'),
 
 (10, 1, 3, 2, '2026-10-11 10:19:00',
- '2026-10-11 10:19:30', 45090, 15.00, 'Completed');
+ '2026-10-11 10:19:30', 45090, 15.00, 'Completed'),
+
+-- Mumbai
+(11, 1, 1, 6, '2026-10-21 10:00:00',
+ '2026-10-21 10:00:30', 45211, 10.00, 'Completed'),
+
+(12, 2, 1, 6, '2026-10-23 10:00:00',
+ '2026-10-23 10:00:30', 45212, 15.00, 'Completed'),
+
+-- Delhi
+(13, 1, 1, 7, '2026-10-21 10:05:00',
+ '2026-10-21 10:05:30', 45213, 8.00, 'Completed'),
+
+(14, 3, 2, 7, '2026-10-23 10:05:00',
+ '2026-10-23 10:05:30', 45214, 12.00, 'Completed'),
+
+-- Chennai
+(15, 1, 1, 8, '2026-10-22 10:10:00',
+ '2026-10-22 10:10:30', 45215, 20.00, 'Completed'),
+
+(16, 2, 1, 8, '2026-10-24 10:10:00',
+ '2026-10-24 10:10:30', 45216, 18.00, 'Completed'),
+
+-- Helsinki
+(17, 1, 2, 9, '2026-10-22 11:00:00',
+ '2026-10-22 11:00:30', 45217, 25.00, 'Completed'),
+
+(18, 3, 2, 9, '2026-10-24 11:00:00',
+ '2026-10-24 11:00:30', 45218, 30.00, 'Completed'),
+
+-- Moscow
+(19, 1, 2, 10, '2026-10-22 11:10:00',
+ '2026-10-22 11:10:30', 45219, 35.00, 'Completed'),
+
+(20, 3, 2, 10, '2026-10-24 11:10:00',
+ '2026-10-24 11:10:30', 45220, 28.00, 'Completed');
 
 -- =====================================================
 -- 8. DATA_PRODUCT
+-- Twenty products linked to the observations.
 -- =====================================================
 
 INSERT INTO DATA_PRODUCT
@@ -209,11 +241,43 @@ VALUES
  '1.0', '2026-10-12 13:00:00'),
 
 (10, 10, 2, 'S2A_BERLIN_L1C_V2', 'Satellite Image', 'Level-1C',
- '2.0', '2026-10-11 14:00:00');
+ '2.0', '2026-10-11 14:00:00'),
+
+(11, 11, 6, 'S2A_MUMBAI_01', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-21 10:10:00'),
+
+(12, 12, 6, 'S2A_MUMBAI_02', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-23 10:10:00'),
+
+(13, 13, 7, 'S2A_DELHI_01', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-21 10:15:00'),
+
+(14, 14, 7, 'S2A_DELHI_02', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-23 10:15:00'),
+
+(15, 15, 8, 'S2A_CHENNAI_01', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-22 10:20:00'),
+
+(16, 16, 8, 'S2A_CHENNAI_02', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-24 10:20:00'),
+
+(17, 17, 9, 'S2A_HELSINKI_01', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-22 11:10:00'),
+
+(18, 18, 9, 'S2A_HELSINKI_02', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-24 11:10:00'),
+
+(19, 19, 10, 'S2A_MOSCOW_01', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-22 11:20:00'),
+
+(20, 20, 10, 'S2A_MOSCOW_02', 'Satellite Image', 'Level-1C',
+ '1.0', '2026-10-24 11:20:00');
 
 -- =====================================================
 -- 9. PROCESSING_ACTIVITY
--- Simulated processing history for database demonstration.
+-- Ten simulated provenance activities.
+-- These are demonstration records, not verified
+-- real-world satellite processing operations.
 -- =====================================================
 
 INSERT INTO PROCESSING_ACTIVITY
@@ -239,7 +303,27 @@ VALUES
 
 (5, 6, 9, 'Data Quality Check', 'Python',
  'Simulated data quality checks',
- '2026-10-20 11:00:00', '2026-10-20 11:15:00', 'Completed');
+ '2026-10-20 11:00:00', '2026-10-20 11:15:00', 'Completed'),
+
+(6, 11, 12, 'Image Quality Assessment', 'Python',
+ 'Simulated quality assessment for Mumbai observation products',
+ '2026-10-25 09:00:00', '2026-10-25 09:15:00', 'Completed'),
+
+(7, 13, 14, 'Metadata Validation', 'SNAP',
+ 'Simulated metadata validation for Delhi observation products',
+ '2026-10-25 09:30:00', '2026-10-25 09:45:00', 'Completed'),
+
+(8, 15, 16, 'Image Comparison', 'Python',
+ 'Simulated image comparison for Chennai observation products',
+ '2026-10-25 10:00:00', '2026-10-25 10:20:00', 'Completed'),
+
+(9, 17, 18, 'Image Quality Assessment', 'Python',
+ 'Simulated quality assessment for Helsinki observation products',
+ '2026-10-25 10:30:00', '2026-10-25 10:45:00', 'Completed'),
+
+(10, 19, 20, 'Metadata Validation', 'SNAP',
+ 'Simulated metadata validation for Moscow observation products',
+ '2026-10-25 11:00:00', '2026-10-25 11:15:00', 'Completed');
 
 COMMIT;
 
@@ -264,102 +348,4 @@ UNION ALL
 SELECT 'DATA_PRODUCT', COUNT(*) FROM DATA_PRODUCT
 UNION ALL
 SELECT 'PROCESSING_ACTIVITY', COUNT(*) FROM PROCESSING_ACTIVITY;
-
-USE satellite_geo_repository;
-
-INSERT INTO GEO_LOCATION
-(geo_location_id, area_name, country, region,
- min_latitude, max_latitude, min_longitude, max_longitude)
-VALUES
-(1, 'Bengaluru', 'India', 'Karnataka',
- 12.80, 13.20, 77.40, 77.80),
-(2, 'Berlin', 'Germany', 'Berlin',
- 52.30, 52.70, 13.20, 13.70),
-(3, 'Madrid', 'Spain', 'Community of Madrid',
- 40.20, 40.60, -3.90, -3.50),
-(4, 'Oslo', 'Norway', 'Oslo',
- 59.70, 60.00, 10.40, 10.90),
-(5, 'Rome', 'Italy', 'Lazio',
- 41.70, 42.00, 12.30, 12.80);
- 
- SELECT * FROM GEO_LOCATION;
- 
- INSERT INTO OBSERVATION
-(observation_id, sensor_id, ground_station_id, geo_location_id,
- observation_start, observation_end, orbit_number,
- cloud_cover_percent, observation_status)
-VALUES
-(1, 1, 1, 2, '2026-10-19 10:19:51', '2026-10-19 10:20:21', 45210, 12.50, 'Completed'),
-(2, 1, 2, 3, '2026-10-19 10:19:51', '2026-10-19 10:20:21', 45210, 8.20, 'Completed'),
-(3, 2, 2, 4, '2026-10-18 10:15:00', '2026-10-18 10:15:30', 45195, 24.00, 'Completed'),
-(4, 3, 2, 2, '2026-10-17 10:05:00', '2026-10-17 10:05:30', 18250, 5.00, 'Completed'),
-(5, 1, 3, 5, '2026-10-16 10:12:00', '2026-10-16 10:12:30', 45165, 45.00, 'Completed'),
-(6, 5, 1, 1, '2026-10-15 06:30:00', '2026-10-15 06:30:20', 32100, 0.00, 'Completed'),
-(7, 2, 3, 3, '2026-10-14 10:19:00', '2026-10-14 10:19:30', 45135, 18.00, 'Completed'),
-(8, 1, 1, 4, '2026-10-13 10:10:00', '2026-10-13 10:10:30', 45120, 9.50, 'Completed'),
-(9, 3, 2, 1, '2026-10-12 10:00:00', '2026-10-12 10:00:30', 18175, 30.00, 'Completed'),
-(10, 1, 3, 2, '2026-10-11 10:19:00', '2026-10-11 10:19:30', 45090, 15.00, 'Completed');
-
-SELECT COUNT(*) AS total_locations FROM GEO_LOCATION;
-SELECT COUNT(*) AS total_observations FROM OBSERVATION;
-
-USE satellite_geo_repository;
-
-INSERT INTO DATA_PRODUCT
-(product_id, observation_id, geo_location_id, product_name,
- product_type, processing_level, version, creation_date)
-VALUES
-(1, 1, 2, 'S2A_BERLIN_L1C', 'Satellite Image', 'Level-1C',
- '1.0', '2026-10-19 14:00:00'),
-
-(2, 2, 3, 'S2A_MADRID_L1C', 'Satellite Image', 'Level-1C',
- '1.0', '2026-10-19 14:10:00'),
-
-(3, 3, 4, 'S2B_OSLO_L1C', 'Satellite Image', 'Level-1C',
- '1.0', '2026-10-18 14:00:00'),
-
-(4, 4, 2, 'LANDSAT_BERLIN_L1', 'Satellite Image', 'Level-1',
- '1.0', '2026-10-17 13:00:00'),
-
-(5, 5, 5, 'S2A_ROME_L1C', 'Satellite Image', 'Level-1C',
- '1.0', '2026-10-16 14:00:00'),
-
-(6, 6, 1, 'S1_BENGALURU_GRD', 'Radar Image', 'GRD',
- '1.0', '2026-10-15 12:00:00'),
-
-(7, 7, 3, 'LANDSAT_MADRID_L1', 'Satellite Image', 'Level-1',
- '1.0', '2026-10-14 13:00:00'),
-
-(8, 8, 4, 'S2A_OSLO_L1C', 'Satellite Image', 'Level-1C',
- '1.0', '2026-10-13 14:00:00'),
-
-(9, 9, 1, 'LANDSAT_BENGALURU_L1', 'Satellite Image', 'Level-1',
- '1.0', '2026-10-12 13:00:00'),
-
-(10, 10, 2, 'S2A_BERLIN_L1C_V2', 'Satellite Image', 'Level-1C',
- '2.0', '2026-10-11 14:00:00');
- 
- INSERT INTO PROCESSING_ACTIVITY
-(activity_id, input_product_id, output_product_id,
- processing_type, software_name, parameters,
- started_at, completed_at, status)
-VALUES
-(1, 1, 2, 'Cloud Mask Generation', 'SNAP',
- 'Simulated cloud threshold: 60 percent',
- '2026-10-20 09:00:00', '2026-10-20 09:10:00', 'Completed'),
-
-(2, 2, 3, 'Image Quality Assessment', 'Python',
- 'Simulated assessment of sample product metadata',
- '2026-10-20 09:15:00', '2026-10-20 09:25:00', 'Completed'),
-
-(3, 4, 7, 'Image Comparison', 'Python',
- 'Simulated comparison of sample image products',
- '2026-10-20 10:00:00', '2026-10-20 10:20:00', 'Completed'),
-
-(4, 5, 8, 'Metadata Validation', 'SNAP',
- 'Simulated product metadata validation',
- '2026-10-20 10:30:00', '2026-10-20 10:40:00', 'Completed'),
-
-(5, 6, 9, 'Data Quality Check', 'Python',
- 'Simulated data quality checks',
- '2026-10-20 11:00:00', '2026-10-20 11:15:00', 'Completed');
+```
