@@ -363,3 +363,66 @@ VALUES
 (5, 6, 9, 'Data Quality Check', 'Python',
  'Simulated data quality checks',
  '2026-10-20 11:00:00', '2026-10-20 11:15:00', 'Completed');
+ 
+ INSERT INTO GEO_LOCATION
+(geo_location_id, area_name, country, region,
+ min_latitude, max_latitude, min_longitude, max_longitude)
+VALUES
+(6, 'Mumbai', 'India', 'Maharashtra',
+ 18.90, 19.30, 72.75, 73.05),
+
+(7, 'Delhi', 'India', 'Delhi',
+ 28.40, 28.90, 76.80, 77.35),
+
+(8, 'Chennai', 'India', 'Tamil Nadu',
+ 12.80, 13.25, 80.10, 80.35),
+
+(9, 'Helsinki', 'Finland', 'Uusimaa',
+ 60.10, 60.35, 24.80, 25.20),
+
+(10, 'Moscow', 'Russia', 'Moscow Oblast',
+ 55.50, 55.95, 37.20, 37.90);
+ 
+ INSERT INTO OBSERVATION
+(observation_id, sensor_id, ground_station_id, geo_location_id,
+ observation_start, observation_end, orbit_number,
+ cloud_cover_percent, observation_status)
+VALUES
+-- Mumbai: 2 observations
+(11, 1, 1, 6, '2026-10-21 10:00:00', '2026-10-21 10:00:30', 45211, 10.00, 'Completed'),
+(12, 2, 1, 6, '2026-10-23 10:00:00', '2026-10-23 10:00:30', 45212, 15.00, 'Completed'),
+
+-- Delhi: 2 observations
+(13, 1, 1, 7, '2026-10-21 10:05:00', '2026-10-21 10:05:30', 45213, 8.00, 'Completed'),
+(14, 3, 2, 7, '2026-10-23 10:05:00', '2026-10-23 10:05:30', 45214, 12.00, 'Completed'),
+
+-- Chennai: 2 observations
+(15, 1, 1, 8, '2026-10-22 10:10:00', '2026-10-22 10:10:30', 45215, 20.00, 'Completed'),
+(16, 2, 1, 8, '2026-10-24 10:10:00', '2026-10-24 10:10:30', 45216, 18.00, 'Completed'),
+
+-- Helsinki: 2 observations
+(17, 1, 2, 9, '2026-10-22 11:00:00', '2026-10-22 11:00:30', 45217, 25.00, 'Completed'),
+(18, 3, 2, 9, '2026-10-24 11:00:00', '2026-10-24 11:00:30', 45218, 30.00, 'Completed'),
+
+-- Moscow: 2 observations
+(19, 1, 2, 10, '2026-10-22 11:10:00', '2026-10-22 11:10:30', 45219, 35.00, 'Completed'),
+(20, 3, 2, 10, '2026-10-24 11:10:00', '2026-10-24 11:10:30', 45220, 28.00, 'Completed');
+
+INSERT INTO DATA_PRODUCT
+(product_id, observation_id, geo_location_id, product_name,
+ product_type, processing_level, version, creation_date)
+VALUES
+(11, 11, 6, 'S2A_MUMBAI_01', 'Satellite Image', 'Level-1C', '1.0', '2026-10-21 10:10:00'),
+(12, 12, 6, 'S2A_MUMBAI_02', 'Satellite Image', 'Level-1C', '1.0', '2026-10-23 10:10:00'),
+
+(13, 13, 7, 'S2A_DELHI_01', 'Satellite Image', 'Level-1C', '1.0', '2026-10-21 10:15:00'),
+(14, 14, 7, 'S2A_DELHI_02', 'Satellite Image', 'Level-1C', '1.0', '2026-10-23 10:15:00'),
+
+(15, 15, 8, 'S2A_CHENNAI_01', 'Satellite Image', 'Level-1C', '1.0', '2026-10-22 10:20:00'),
+(16, 16, 8, 'S2A_CHENNAI_02', 'Satellite Image', 'Level-1C', '1.0', '2026-10-24 10:20:00'),
+
+(17, 17, 9, 'S2A_HELSINKI_01', 'Satellite Image', 'Level-1C', '1.0', '2026-10-22 11:10:00'),
+(18, 18, 9, 'S2A_HELSINKI_02', 'Satellite Image', 'Level-1C', '1.0', '2026-10-24 11:10:00'),
+
+(19, 19, 10, 'S2A_MOSCOW_01', 'Satellite Image', 'Level-1C', '1.0', '2026-10-22 11:20:00'),
+(20, 20, 10, 'S2A_MOSCOW_02', 'Satellite Image', 'Level-1C', '1.0', '2026-10-24 11:20:00');
